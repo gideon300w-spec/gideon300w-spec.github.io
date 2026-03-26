@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Sum it UP / 더하기는 더하기 — 숫자 합 퍼즐. Sum 10, Rush 10, Sum 612." id="meta-desc" />
-  <title>Sum it UP</title>
+  <meta name="description" content="Sum it UP — connect adjacent tiles to hit the target sum. Sum 10, Rush 10, Sum 612." id="meta-desc" />
+  <title>Sum it UP — number sum puzzle</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
@@ -195,7 +195,7 @@
     </div>
 
     <!-- Korean -->
-    <div data-lang-panel="ko" id="panel-ko">
+    <div data-lang-panel="ko" id="panel-ko" hidden>
       <span class="badge">모바일 게임</span>
       <h1>더하기는 더하기</h1>
       <p class="title-sub">iOS 표시 이름 · 영문: Sum it UP</p>
@@ -252,7 +252,7 @@
     </div>
 
     <!-- English -->
-    <div data-lang-panel="en" id="panel-en" hidden>
+    <div data-lang-panel="en" id="panel-en">
       <span class="badge">Mobile game</span>
       <h1>Sum it UP</h1>
       <p class="title-sub">On the App Store: <em>Sum it Up — Easy, Right?</em></p>
@@ -350,8 +350,7 @@
           var saved = localStorage.getItem(STORAGE_KEY);
           if (saved === "ko" || saved === "en") return saved;
         } catch (e) {}
-        var nav = navigator.language || navigator.userLanguage || "";
-        return nav.toLowerCase().startsWith("ko") ? "ko" : "en";
+        return "en";
       }
 
       btnKo.addEventListener("click", function () {

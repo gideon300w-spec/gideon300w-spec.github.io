@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Sum it UP — 빠른 판단이 필요한 숫자 합 퍼즐. Sum 10, Rush 10, 가변 합 모드." />
+  <meta name="description" content="Sum it UP — 인접 타일을 이어 합을 맞추는 숫자 퍼즐. Sum 10, Rush 10, Sum 6–12 세 가지 모드." />
   <title>Sum it UP — 숫자 합 퍼즐</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,7 +25,7 @@
       font-family: "DM Sans", system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
     }
     .wrap {
       max-width: 40rem;
@@ -55,6 +55,15 @@
       color: var(--muted);
       margin: 0 0 2rem;
     }
+    h2.section {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin: 2rem 0 0.85rem;
+    }
+    h2.section:first-of-type { margin-top: 0; }
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -62,20 +71,33 @@
       padding: 1.25rem 1.35rem;
       margin-bottom: 1rem;
     }
-    .card h2 {
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--muted);
-      margin: 0 0 0.75rem;
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 0 0.65rem;
+      letter-spacing: 0.02em;
     }
+    .card p {
+      margin: 0 0 0.65rem;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .card p:last-child { margin-bottom: 0; }
     .card ul {
       margin: 0;
       padding-left: 1.15rem;
       color: var(--text);
+      font-size: 0.95rem;
     }
-    .card li { margin-bottom: 0.35rem; }
+    .card li { margin-bottom: 0.4rem; }
+    .play-steps {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .play-steps li { margin-bottom: 0.5rem; }
     .cta {
       display: flex;
       flex-wrap: wrap;
@@ -111,10 +133,11 @@
     }
     footer a { color: var(--accent); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
-    .note {
+    .copyright {
       font-size: 0.8rem;
       color: var(--muted);
-      margin-top: 1rem;
+      margin-top: 1.25rem;
+      opacity: 0.9;
     }
   </style>
 </head>
@@ -123,27 +146,54 @@
     <span class="badge">Mobile game</span>
     <h1>Sum it UP</h1>
     <p class="lead">
-      인접한 타일을 골라 합이 목표가 되게 만드는 숫자 퍼즐입니다. 짧은 판에 콤보와 랭킹까지 — 한 판 더 하기 쉬운 구성이에요.
+      보드 위의 숫자 타일을 <strong>드래그로 이어</strong> 선택합니다. 위·아래·옆으로 붙은 칸만 이을 수 있고, 이미 지운 빈 칸을 <strong>징검다리처럼 건너</strong> 인접 타일과도 이을 수 있어요. 고른 숫자들의 <strong>합이 목표 합과 같으면</strong> 해당 타일이 사라지고 점수가 오릅니다. 클리어한 칸은 비어 있는 채로 남아, 남은 타일만으로 다음 수를 짜야 합니다.
     </p>
 
+    <h2 class="section">플레이 방법</h2>
     <div class="card">
-      <h2>모드</h2>
+      <ol class="play-steps">
+        <li>손가락을 타일에서 누른 채로 인접한 타일로 이어 그립니다.</li>
+        <li>경로에 있는 숫자의 합이 화면에 표시된 <strong>목표 합</strong>과 같으면 손을 떼어 클리어합니다.</li>
+        <li>합이 맞지 않으면 클리어되지 않고, 다시 선택을 시작하면 됩니다.</li>
+      </ol>
+    </div>
+
+    <h2 class="section">게임 모드</h2>
+
+    <div class="card">
+      <h3>Sum 10</h3>
+      <p>가장 기본이 되는 모드입니다. 목표 합은 <strong>항상 10</strong>이고, 타일에는 <strong>1부터 5</strong>까지의 숫자만 나옵니다. <strong>90초</strong> 안에 최대한 많은 점수를 내세요.</p>
       <ul>
-        <li><strong>Sum 10</strong> — 목표 합 10, 1–5 숫자, 90초, 연속 클리어 콤보</li>
-        <li><strong>Rush 10</strong> — 바가 줄어듭니다. 클리어로 리셋, 속도는 점점 빨라집니다</li>
-        <li><strong>가변 합</strong> — 목표 6–12 랜덤, 같은 규칙으로 난이도 변주</li>
+        <li>연속으로 클리어하면 <strong>콤보</strong>가 쌓이고, 점수에 보너스 배율이 적용됩니다.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Rush 10</h3>
+      <p>역시 목표 합은 <strong>10</strong>이지만, 제한 시간 대신 <strong>러시 바</strong>가 줄어듭니다. 바가 다 닳기 전에 클리어해야 하며, 클리어할 때마다 바가 다시 채워집니다.</p>
+      <ul>
+        <li><strong>3회 클리어할 때마다</strong> 바가 줄어드는 속도가 빨라집니다.</li>
+        <li>클리어 순간 <strong>남은 바가 많을수록</strong> 점수 배율이 높아집니다.</li>
+        <li>이 모드에서는 Sum 10과 달리 <strong>콤보 보너스는 없고</strong>, 러시 바 기준 배율만 적용됩니다.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Sum 6–12</h3>
+      <p>매 클리어 후 목표 합이 <strong>6에서 12 사이의 값으로 무작위</strong>로 바뀝니다. 타일 숫자 범위와 90초 제한, 콤보 규칙은 Sum 10과 같습니다.</p>
+      <ul>
+        <li>목표가 바뀔 때마다 한 수 한 수 판단이 달라져 <strong>난이도의 변주</strong>를 느낄 수 있습니다.</li>
       </ul>
     </div>
 
     <div class="cta">
-      <!-- TODO: App Store 출시 링크로 바꾼 뒤 gideon300w-spec.github.io 저장소 루트에 이 파일을 index.html 로 배포하세요. -->
       <a class="cta-primary" href="https://apps.apple.com/app/idYOUR_APP_ID" rel="noopener">App Store에서 보기</a>
       <a class="cta-secondary" href="https://gideon300w-spec.github.io/privacy-policy/">개인정보 처리방침</a>
     </div>
 
     <footer>
       <p>문의·피드백은 App Store 앱 페이지의 지원 링크를 이용해 주세요.</p>
-      <p class="note">호스팅: <a href="https://gideon300w-spec.github.io/">gideon300w-spec.github.io</a></p>
+      <p class="copyright">© 2026 Sum it UP. All rights reserved.</p>
     </footer>
   </div>
 </body>

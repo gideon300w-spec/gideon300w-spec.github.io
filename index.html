@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Sum it UP — 인접 타일을 이어 합을 맞추는 숫자 퍼즐. Sum 10, Rush 10, Sum 6–12 세 가지 모드." />
-  <title>Sum it UP — 숫자 합 퍼즐</title>
+  <meta name="description" content="Sum it UP / 더하기는 더하기 — 숫자 합 퍼즐. Sum 10, Rush 10, Sum 6–12." id="meta-desc" />
+  <title>Sum it UP</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
@@ -32,6 +32,39 @@
       margin: 0 auto;
       padding: 2.5rem 1.25rem 4rem;
     }
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .lang-switch {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.45rem 0.9rem;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .lang-switch button:hover {
+      color: var(--text);
+      background: var(--surface);
+    }
+    .lang-switch button[aria-pressed="true"] {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
     .badge {
       display: inline-block;
       font-size: 0.75rem;
@@ -47,14 +80,21 @@
       font-size: clamp(2rem, 6vw, 2.75rem);
       font-weight: 700;
       line-height: 1.15;
-      margin: 0 0 0.75rem;
+      margin: 0 0 0.35rem;
       letter-spacing: -0.02em;
+    }
+    .title-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0 0 1.25rem;
+      font-weight: 400;
     }
     .lead {
       font-size: 1.125rem;
       color: var(--muted);
       margin: 0 0 2rem;
     }
+    .lead strong { color: #c5d4e0; }
     h2.section {
       font-size: 0.85rem;
       font-weight: 600;
@@ -64,6 +104,7 @@
       margin: 2rem 0 0.85rem;
     }
     h2.section:first-of-type { margin-top: 0; }
+    [data-lang-panel] h2.section:first-of-type { margin-top: 0; }
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -139,62 +180,189 @@
       margin-top: 1.25rem;
       opacity: 0.9;
     }
+    [data-lang-panel][hidden] {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <span class="badge">Mobile game</span>
-    <h1>Sum it UP</h1>
-    <p class="lead">
-      보드 위의 숫자 타일을 <strong>드래그로 이어</strong> 선택합니다. 위·아래·옆으로 붙은 칸만 이을 수 있고, 이미 지운 빈 칸을 <strong>징검다리처럼 건너</strong> 인접 타일과도 이을 수 있어요. 고른 숫자들의 <strong>합이 목표 합과 같으면</strong> 해당 타일이 사라지고 점수가 오릅니다. 클리어한 칸은 비어 있는 채로 남아, 남은 타일만으로 다음 수를 짜야 합니다.
-    </p>
-
-    <h2 class="section">플레이 방법</h2>
-    <div class="card">
-      <ol class="play-steps">
-        <li>손가락을 타일에서 누른 채로 인접한 타일로 이어 그립니다.</li>
-        <li>경로에 있는 숫자의 합이 화면에 표시된 <strong>목표 합</strong>과 같으면 손을 떼어 클리어합니다.</li>
-        <li>합이 맞지 않으면 클리어되지 않고, 다시 선택을 시작하면 됩니다.</li>
-      </ol>
+    <div class="top-bar">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" id="btn-en" data-set-lang="en" aria-pressed="false">English</button>
+        <button type="button" id="btn-ko" data-set-lang="ko" aria-pressed="false">한국어</button>
+      </div>
     </div>
 
-    <h2 class="section">게임 모드</h2>
+    <!-- Korean -->
+    <div data-lang-panel="ko" id="panel-ko">
+      <span class="badge">모바일 게임</span>
+      <h1>더하기는 더하기</h1>
+      <p class="title-sub">iOS 표시 이름 · 영문: Sum it UP</p>
+      <p class="lead">
+        보드 위의 숫자 타일을 <strong>드래그로 이어</strong> 선택합니다. 위·아래·옆으로 붙은 칸만 이을 수 있고, 이미 지운 빈 칸을 <strong>징검다리처럼 건너</strong> 인접 타일과도 이을 수 있어요. 고른 숫자들의 <strong>합이 목표 합과 같으면</strong> 해당 타일이 사라지고 점수가 오릅니다. 클리어한 칸은 비어 있는 채로 남아, 남은 타일만으로 다음 수를 짜야 합니다.
+      </p>
 
-    <div class="card">
-      <h3>Sum 10</h3>
-      <p>가장 기본이 되는 모드입니다. 목표 합은 <strong>항상 10</strong>이고, 타일에는 <strong>1부터 5</strong>까지의 숫자만 나옵니다. <strong>90초</strong> 안에 최대한 많은 점수를 내세요.</p>
-      <ul>
-        <li>연속으로 클리어하면 <strong>콤보</strong>가 쌓이고, 점수에 보너스 배율이 적용됩니다.</li>
-      </ul>
+      <h2 class="section">플레이 방법</h2>
+      <div class="card">
+        <ol class="play-steps">
+          <li>손가락을 타일에서 누른 채로 인접한 타일로 이어 그립니다.</li>
+          <li>경로에 있는 숫자의 합이 화면에 표시된 <strong>목표 합</strong>과 같으면 손을 떼어 클리어합니다.</li>
+          <li>합이 맞지 않으면 클리어되지 않고, 다시 선택을 시작하면 됩니다.</li>
+        </ol>
+      </div>
+
+      <h2 class="section">게임 모드</h2>
+
+      <div class="card">
+        <h3>Sum 10</h3>
+        <p>가장 기본이 되는 모드입니다. 목표 합은 <strong>항상 10</strong>이고, 타일에는 <strong>1부터 5</strong>까지의 숫자만 나옵니다. <strong>90초</strong> 안에 최대한 많은 점수를 내세요.</p>
+        <ul>
+          <li>연속으로 클리어하면 <strong>콤보</strong>가 쌓이고, 점수에 보너스 배율이 적용됩니다.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Rush 10</h3>
+        <p>역시 목표 합은 <strong>10</strong>이지만, 제한 시간 대신 <strong>러시 바</strong>가 줄어듭니다. 바가 다 닳기 전에 클리어해야 하며, 클리어할 때마다 바가 다시 채워집니다.</p>
+        <ul>
+          <li><strong>3회 클리어할 때마다</strong> 바가 줄어드는 속도가 빨라집니다.</li>
+          <li>클리어 순간 <strong>남은 바가 많을수록</strong> 점수 배율이 높아집니다.</li>
+          <li>이 모드에서는 Sum 10과 달리 <strong>콤보 보너스는 없고</strong>, 러시 바 기준 배율만 적용됩니다.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Sum 6–12</h3>
+        <p>매 클리어 후 목표 합이 <strong>6에서 12 사이의 값으로 무작위</strong>로 바뀝니다. 타일 숫자 범위와 90초 제한, 콤보 규칙은 Sum 10과 같습니다.</p>
+        <ul>
+          <li>목표가 바뀔 때마다 한 수 한 수 판단이 달라져 <strong>난이도의 변주</strong>를 느낄 수 있습니다.</li>
+        </ul>
+      </div>
+
+      <div class="cta">
+        <a class="cta-primary" href="https://apps.apple.com/app/sum-it-up-easy-right/id6761005088" rel="noopener">App Store에서 보기</a>
+        <a class="cta-secondary" href="https://gideon300w-spec.github.io/privacy-policy/">개인정보 처리방침</a>
+      </div>
+
+      <footer>
+        <p>문의·피드백은 App Store 앱 페이지의 지원 링크를 이용해 주세요.</p>
+        <p class="copyright">© 2026 GideonWebSolution. All rights reserved.</p>
+      </footer>
     </div>
 
-    <div class="card">
-      <h3>Rush 10</h3>
-      <p>역시 목표 합은 <strong>10</strong>이지만, 제한 시간 대신 <strong>러시 바</strong>가 줄어듭니다. 바가 다 닳기 전에 클리어해야 하며, 클리어할 때마다 바가 다시 채워집니다.</p>
-      <ul>
-        <li><strong>3회 클리어할 때마다</strong> 바가 줄어드는 속도가 빨라집니다.</li>
-        <li>클리어 순간 <strong>남은 바가 많을수록</strong> 점수 배율이 높아집니다.</li>
-        <li>이 모드에서는 Sum 10과 달리 <strong>콤보 보너스는 없고</strong>, 러시 바 기준 배율만 적용됩니다.</li>
-      </ul>
-    </div>
+    <!-- English -->
+    <div data-lang-panel="en" id="panel-en" hidden>
+      <span class="badge">Mobile game</span>
+      <h1>Sum it UP</h1>
+      <p class="title-sub">On the App Store: <em>Sum it Up — Easy, Right?</em></p>
+      <p class="lead">
+        <strong>Drag</strong> across number tiles to build a path. You may only step to orthogonally adjacent cells, and you can <strong>bridge across empty spaces</strong> you’ve already cleared, like stepping stones. When the <strong>sum of your path equals the target</strong>, those tiles clear and you score. Cleared cells stay empty—you plan the next move with what’s left on the board.
+      </p>
 
-    <div class="card">
-      <h3>Sum 6–12</h3>
-      <p>매 클리어 후 목표 합이 <strong>6에서 12 사이의 값으로 무작위</strong>로 바뀝니다. 타일 숫자 범위와 90초 제한, 콤보 규칙은 Sum 10과 같습니다.</p>
-      <ul>
-        <li>목표가 바뀔 때마다 한 수 한 수 판단이 달라져 <strong>난이도의 변주</strong>를 느낄 수 있습니다.</li>
-      </ul>
-    </div>
+      <h2 class="section">How to play</h2>
+      <div class="card">
+        <ol class="play-steps">
+          <li>Touch a tile and drag through adjacent tiles to extend your path.</li>
+          <li>Release when the sum of the path matches the <strong>target sum</strong> shown on screen to clear.</li>
+          <li>If the sum doesn’t match, nothing clears—lift your finger and try a new selection.</li>
+        </ol>
+      </div>
 
-    <div class="cta">
-      <a class="cta-primary" href="https://apps.apple.com/app/sum-it-up-easy-right/id6761005088" rel="noopener">App Store에서 보기</a>
-      <a class="cta-secondary" href="https://gideon300w-spec.github.io/privacy-policy/">개인정보 처리방침</a>
-    </div>
+      <h2 class="section">Game modes</h2>
 
-    <footer>
-      <p>문의·피드백은 App Store 앱 페이지의 지원 링크를 이용해 주세요.</p>
-      <p class="copyright">© 2026 GideonWebSolution. All rights reserved.</p>
-    </footer>
+      <div class="card">
+        <h3>Sum 10</h3>
+        <p>The classic mode. The target sum is <strong>always 10</strong>. Tiles show values from <strong>1 to 5</strong>. Score as much as you can in <strong>90 seconds</strong>.</p>
+        <ul>
+          <li>Clear multiple times in a row to build a <strong>combo</strong> and earn a score multiplier.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Rush 10</h3>
+        <p>Target sum is still <strong>10</strong>, but instead of a countdown clock you have a <strong>rush bar</strong> that drains. Clear before it empties; each clear refills the bar.</p>
+        <ul>
+          <li>Every <strong>3 clears</strong>, the bar drains faster.</li>
+          <li>The <strong>more bar remaining</strong> when you clear, the higher your score multiplier.</li>
+          <li>Unlike Sum 10, there is <strong>no combo bonus</strong>—only the rush-bar multiplier applies.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Sum 6–12</h3>
+        <p>After each clear, the target sum changes to a <strong>random value from 6 to 12</strong>. Tile values, the 90-second limit, and combo rules match Sum 10.</p>
+        <ul>
+          <li>Shifting targets keep each round feeling <strong>fresh and tactical</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="cta">
+        <a class="cta-primary" href="https://apps.apple.com/app/sum-it-up-easy-right/id6761005088" rel="noopener">View on the App Store</a>
+        <a class="cta-secondary" href="https://gideon300w-spec.github.io/privacy-policy/">Privacy policy</a>
+      </div>
+
+      <footer>
+        <p>For questions or feedback, use the support link on the App Store listing.</p>
+        <p class="copyright">© 2026 GideonWebSolution. All rights reserved.</p>
+      </footer>
+    </div>
   </div>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = "sumitup-landing-lang";
+      var panels = {
+        ko: document.getElementById("panel-ko"),
+        en: document.getElementById("panel-en"),
+      };
+      var btnKo = document.getElementById("btn-ko");
+      var btnEn = document.getElementById("btn-en");
+      var metaDesc = document.getElementById("meta-desc");
+      var titleEl = document.querySelector("title");
+
+      var descriptions = {
+        ko: "더하기는 더하기 / Sum it UP — 인접 타일을 이어 합을 맞추는 숫자 퍼즐. Sum 10, Rush 10, Sum 6–12.",
+        en: "Sum it UP — connect adjacent tiles to hit the target sum. Sum 10, Rush 10, Sum 6–12.",
+      };
+      var titles = {
+        ko: "더하기는 더하기 — 숫자 합 퍼즐",
+        en: "Sum it UP — number sum puzzle",
+      };
+
+      function setLang(lang) {
+        if (lang !== "ko" && lang !== "en") lang = "en";
+        try {
+          localStorage.setItem(STORAGE_KEY, lang);
+        } catch (e) {}
+
+        document.documentElement.lang = lang;
+        panels.ko.hidden = lang !== "ko";
+        panels.en.hidden = lang !== "en";
+        btnKo.setAttribute("aria-pressed", lang === "ko" ? "true" : "false");
+        btnEn.setAttribute("aria-pressed", lang === "en" ? "true" : "false");
+        if (metaDesc) metaDesc.setAttribute("content", descriptions[lang]);
+        if (titleEl) titleEl.textContent = titles[lang];
+      }
+
+      function initialLang() {
+        try {
+          var saved = localStorage.getItem(STORAGE_KEY);
+          if (saved === "ko" || saved === "en") return saved;
+        } catch (e) {}
+        var nav = navigator.language || navigator.userLanguage || "";
+        return nav.toLowerCase().startsWith("ko") ? "ko" : "en";
+      }
+
+      btnKo.addEventListener("click", function () {
+        setLang("ko");
+      });
+      btnEn.addEventListener("click", function () {
+        setLang("en");
+      });
+
+      setLang(initialLang());
+    })();
+  </script>
 </body>
 </html>

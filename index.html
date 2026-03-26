@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sum it UP — 빠른 판단이 필요한 숫자 합 퍼즐. Sum 10, Rush 10, 가변 합 모드." />
+  <title>Sum it UP — 숫자 합 퍼즐</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a222c;
+      --text: #e8eef4;
+      --muted: #8b9aab;
+      --accent: #5eead4;
+      --accent-dim: #2dd4bf33;
+      --border: #2a3544;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent-dim);
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: clamp(2rem, 6vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 0 0 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .lead {
+      font-size: 1.125rem;
+      color: var(--muted);
+      margin: 0 0 2rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.35rem;
+      margin-bottom: 1rem;
+    }
+    .card h2 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin: 0 0 0.75rem;
+    }
+    .card ul {
+      margin: 0;
+      padding-left: 1.15rem;
+      color: var(--text);
+    }
+    .card li { margin-bottom: 0.35rem; }
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 1.35rem;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+    .cta a:hover { opacity: 0.92; transform: translateY(-1px); }
+    .cta-primary {
+      background: var(--accent);
+      color: #0f1419;
+    }
+    .cta-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <span class="badge">Mobile game</span>
+    <h1>Sum it UP</h1>
+    <p class="lead">
+      인접한 타일을 골라 합이 목표가 되게 만드는 숫자 퍼즐입니다. 짧은 판에 콤보와 랭킹까지 — 한 판 더 하기 쉬운 구성이에요.
+    </p>
+
+    <div class="card">
+      <h2>모드</h2>
+      <ul>
+        <li><strong>Sum 10</strong> — 목표 합 10, 1–5 숫자, 90초, 연속 클리어 콤보</li>
+        <li><strong>Rush 10</strong> — 바가 줄어듭니다. 클리어로 리셋, 속도는 점점 빨라집니다</li>
+        <li><strong>가변 합</strong> — 목표 6–12 랜덤, 같은 규칙으로 난이도 변주</li>
+      </ul>
+    </div>
+
+    <div class="cta">
+      <!-- TODO: App Store 출시 링크로 바꾼 뒤 gideon300w-spec.github.io 저장소 루트에 이 파일을 index.html 로 배포하세요. -->
+      <a class="cta-primary" href="https://apps.apple.com/app/idYOUR_APP_ID" rel="noopener">App Store에서 보기</a>
+      <a class="cta-secondary" href="https://gideon300w-spec.github.io/privacy-policy/">개인정보 처리방침</a>
+    </div>
+
+    <footer>
+      <p>문의·피드백은 App Store 앱 페이지의 지원 링크를 이용해 주세요.</p>
+      <p class="note">호스팅: <a href="https://gideon300w-spec.github.io/">gideon300w-spec.github.io</a></p>
+    </footer>
+  </div>
+</body>
+</html>
